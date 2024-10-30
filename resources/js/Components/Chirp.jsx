@@ -13,7 +13,7 @@ export default function Chirp({ chirp }) {
 
     const [editing, setEditing] = useState(false);
 
-    const { data, setData, patch, processing, reset, errors } = useForm({
+    const { data, setData, patch, clearErrors, reset, errors } = useForm({
         message: chirp.message,
     });
 
@@ -60,12 +60,12 @@ export default function Chirp({ chirp }) {
                         <InputError message={errors.message} className="mt-2" />
                         <div className="space-x-2">
                             <PrimaryButton className="mt-4">Save</PrimaryButton>
-                            <button className="mt-4" onClick={() => setEditing(false) && reset()}>Cancel</button>
+                            <button className="mt-4" onClick={() => { setEditing(false); reset(); clearErrors(); }}>Cancel</button>
                         </div>
                     </form>
                     : <p className="mt-4 text-lg text-gray-900">{chirp.message}</p>
                 }
             </div>
         </div>
-    )
+    );
 }
